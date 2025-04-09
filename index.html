@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Game Sales Analytics 🎮✨</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #6e48aa, #9d50bb);
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0;
+            animation: fadeIn 1s ease-in;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .nav-bar {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: flex;
+            justify-content: space-around;
+            animation: slideIn 1s ease-out;
+        }
+
+        .nav-item {
+            cursor: pointer;
+            padding: 10px 20px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            transform: scale(1.1);
+        }
+
+        .tableau-section {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+            animation: bounceIn 1s ease;
+        }
+
+        .tableau-embed {
+            width: 100%;
+            height: 800px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            animation: popIn 0.5s ease forwards;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            background: rgba(0,0,0,0.1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.9); opacity: 0; }
+            60% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        .tableau-fallback {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            color: #ff6b6b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Video Game Sales Analytics 🎮🚀</h1>
+            <p>Level Up with Worldwide Sales Insights! ✨</p>
+        </header>
+
+        <nav class="nav-bar">
+            <div class="nav-item">Home 🏠</div>
+            <div class="nav-item">Sales Dashboards 🎮</div>
+            <div class="nav-item">Market Trends 📈</div>
+            <div class="nav-item">About Us 👾</div>
+        </nav>
+
+        <section class="tableau-section">
+            <h2>Global Sales Dashboard 🌍</h2>
+            <p>Dive into video game sales data worldwide! 👇</p>
+            <iframe 
+                class="tableau-embed"
+                src="https://public.tableau.com/views/HW1_17441893007650/Dashboard1?:language=en-US&:display_count=n&:origin=viz_share_link"
+                allowfullscreen
+            ></iframe>
+            <div class="tableau-fallback">
+                <p>🚨 Game Over! Dashboard failed to load. Try refreshing or visit the <a href="https://public.tableau.com/views/HW1_17441893007650/Dashboard1?:language=en-US&:display_count=n&:origin=viz_share_link" target="_blank">direct link</a>! 🎮</p>
+            </div>
+        </section>
+
+        <section class="stats-grid">
+            <div class="stat-card">
+                <h3>Games Sold 🎮</h3>
+                <p>500M+</p>
+            </div>
+            <div class="stat-card">
+                <h3>Revenue 💰</h3>
+                <p>$150B+</p>
+            </div>
+            <div class="stat-card">
+                <h3>Players 🕹️</h3>
+                <p>3B+</p>
+            </div>
+        </section>
+
+        <footer>
+            <p>© 2025 Video Game Sales Analytics | Hosted on GitHub Pages | Made with ❤️ & 🎮</p>
+        </footer>
+    </div>
+
+    <script>
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', () => {
+                alert(`Navigating to ${item.textContent.split(' ')[0]} section! 🚀`);
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            const elements = document.querySelectorAll('.stat-card');
+            elements.forEach(el => {
+                const position = el.getBoundingClientRect();
+                if (position.top < window.innerHeight - 100) {
+                    el.style.animation = 'popIn 0.5s ease forwards';
+                }
+            });
+        });
+
+        const tableauIframe = document.querySelector('.tableau-embed');
+        const fallback = document.querySelector('.tableau-fallback');
+        
+        tableauIframe.addEventListener('load', () => {
+            tableauIframe.style.display = 'block';
+            fallback.style.display = 'none';
+        });
+
+        setTimeout(() => {
+            if (!tableauIframe.contentWindow || tableauIframe.contentWindow.location.href === 'about:blank') {
+                tableauIframe.style.display = 'none';
+                fallback.style.display = 'block';
+            }
+        }, 5000);
+    </script>
+</body>
+</html>
