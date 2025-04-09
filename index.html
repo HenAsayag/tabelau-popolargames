@@ -68,6 +68,7 @@
             border: none;
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0,0,0,0.2);
+            display: block; /* Ensure it’s visible by default */
         }
 
         .stats-grid {
@@ -97,33 +98,17 @@
             background: rgba(0,0,0,0.1);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideIn {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        @keyframes bounceIn {
-            0% { transform: scale(0.9); opacity: 0; }
-            60% { transform: scale(1.05); opacity: 1; }
-            100% { transform: scale(1); }
-        }
-
-        @keyframes popIn {
-            from { transform: scale(0); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
         .tableau-fallback {
             display: none;
             text-align: center;
             padding: 20px;
             color: #ff6b6b;
         }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideIn { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes bounceIn { 0% { transform: scale(0.9); opacity: 0; } 60% { transform: scale(1.05); opacity: 1; } 100% { transform: scale(1); } }
+        @keyframes popIn { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
     </style>
 </head>
 <body>
@@ -145,7 +130,7 @@
             <p>Dive into video game sales data worldwide! 👇</p>
             <iframe 
                 class="tableau-embed"
-                src="https://public.tableau.com/views/HW1_17441893007650/Dashboard1?:language=en-US&:display_count=n&:origin=viz_share_link"
+                src="https://public.tableau.com/views/HW1_17441893007650/Dashboard1?:language=en-US&:display_count=n&:origin=viz_share_link&:embed=y&:showVizHome=n&:apiID=host0"
                 allowfullscreen
             ></iframe>
             <div class="tableau-fallback">
@@ -192,16 +177,23 @@
 
         const tableauIframe = document.querySelector('.tableau-embed');
         const fallback = document.querySelector('.tableau-fallback');
-        
+
+        // Check if iframe loads
         tableauIframe.addEventListener('load', () => {
+            console.log('Iframe loaded successfully');
             tableauIframe.style.display = 'block';
             fallback.style.display = 'none';
         });
 
+        // Enhanced fallback with error detection
         setTimeout(() => {
-            if (!tableauIframe.contentWindow || tableauIframe.contentWindow.location.href === 'about:blank') {
+            const iframeDoc = tableauIframe.contentDocument || tableauIframe.contentWindow.document;
+            if (!iframeDoc || iframeDoc.body.innerHTML === '' || tableauIframe.contentWindow.location.href === 'about:blank') {
+                console.log('Iframe failed to load content');
                 tableauIframe.style.display = 'none';
                 fallback.style.display = 'block';
+            } else {
+                console.log('Iframe content detected');
             }
         }, 5000);
     </script>
